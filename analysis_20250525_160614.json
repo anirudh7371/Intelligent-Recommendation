@@ -1,0 +1,97 @@
+{
+  "website": "apexcabs.com.au",
+  "device_type": "mobile",
+  "performance_score": 65,
+  "total_issues_found": 7,
+  "issues_summary": {
+    "total_issues": 7,
+    "by_severity": {
+      "critical": 3,
+      "high": 4,
+      "medium": 0,
+      "low": 0
+    },
+    "by_category": {
+      "diagnostic": 6,
+      "core-web-vital": 1
+    },
+    "core_web_vitals_issues": 1
+  },
+  "detailed_analysis": {
+    "priority_fixes": [
+      {
+        "issue_title": "Reduce Unused JavaScript",
+        "priority_rank": 1,
+        "what_is_wrong": "The website is loading a significant amount of JavaScript code that is not being used, wasting bandwidth and slowing down page load.",
+        "how_to_fix": {
+          "steps": [
+            "Analyze the JavaScript code to identify and remove unused functions and libraries.",
+            "Use a JavaScript bundler (like Webpack or Parcel) with tree-shaking enabled to automatically remove unused code during the build process.",
+            "Use code splitting to load JavaScript modules only when they are needed."
+          ],
+          "technical_details": "Implement tree-shaking in your build process.  Use dynamic imports (`import()` statement) to load JavaScript modules on demand. Analyze your bundle size using tools like Source Map Explorer to pinpoint large, unused chunks."
+        },
+        "expected_improvement": "Significant improvement in performance score, potentially 10-20 points or more.",
+        "difficulty": "medium",
+        "time_estimate": "4-8 hours"
+      },
+      {
+        "issue_title": "Avoid Multiple Page Redirects",
+        "priority_rank": 2,
+        "what_is_wrong": "The website is using multiple redirects, adding unnecessary delays to the page load time.",
+        "how_to_fix": {
+          "steps": [
+            "Identify all redirects using browser developer tools (Network tab).",
+            "Determine the cause of each redirect (e.g., old links, misconfigurations).",
+            "Remove unnecessary redirects by updating links and server configurations."
+          ],
+          "technical_details": "Check `.htaccess` files (Apache) or equivalent server configuration for redirect rules.  Examine website code for any JavaScript redirects.  Use a tool like HTTP Archive to analyze redirects."
+        },
+        "expected_improvement": "Significant improvement, potentially 5-10 points.",
+        "difficulty": "medium",
+        "time_estimate": "2-4 hours"
+      },
+      {
+        "issue_title": "Properly Size Images",
+        "priority_rank": 3,
+        "what_is_wrong": "Images are being served at larger sizes than necessary, increasing download times and consuming more bandwidth.",
+        "how_to_fix": {
+          "steps": [
+            "Optimize images using tools like TinyPNG or ImageOptim to reduce file size without significant quality loss.",
+            "Use responsive images (`<picture>` element or `srcset` attribute) to serve different image sizes based on the device's screen resolution.",
+            "Use appropriate image formats (WebP for better compression)."
+          ],
+          "technical_details": "Implement responsive images using `srcset` and `sizes` attributes in `<img>` tags.  Consider using a CDN that supports image optimization."
+        },
+        "expected_improvement": "Moderate improvement, potentially 3-5 points.",
+        "difficulty": "easy",
+        "time_estimate": "2-4 hours"
+      },
+      {
+        "issue_title": "Preload Largest Contentful Paint image",
+        "priority_rank": 4,
+        "what_is_wrong": "The Largest Contentful Paint (LCP) image is not being preloaded, delaying the display of the main content.",
+        "how_to_fix": {
+          "steps": [
+            "Identify the LCP element using Lighthouse or Chrome DevTools.",
+            "Add a `<link rel=\"preload\">` tag to the `<head>` of the HTML document to preload the LCP image."
+          ],
+          "technical_details": "Use `<link rel=\"preload\" href=\"[image_url]\" as=\"image\">` in the `<head>` section. Ensure the image URL is accurate and the image is actually the LCP element."
+        },
+        "expected_improvement": "Moderate improvement, potentially 2-3 points.",
+        "difficulty": "easy",
+        "time_estimate": "1 hour"
+      }
+    ],
+    "quick_wins": [
+      "Preload Largest Contentful Paint image",
+      "Serve static assets with an efficient cache policy (by setting appropriate Cache-Control headers)"
+    ],
+    "biggest_impact": [
+      "Reduce Unused JavaScript",
+      "Avoid Multiple Page Redirects"
+    ],
+    "overall_strategy": "Prioritize fixing the critical and high-severity issues related to JavaScript, redirects, and images.  Then, address the remaining issues to further improve performance.  Use browser developer tools and Lighthouse to monitor progress and identify any new issues that emerge after making changes."
+  },
+  "analysis_timestamp": "2025-05-25T16:06:14.178715"
+}
